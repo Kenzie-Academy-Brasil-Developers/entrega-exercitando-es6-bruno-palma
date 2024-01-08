@@ -30,25 +30,25 @@ const sellBook = (bookList, bookId, userType = "normal") => {
 
     const userDiscount = (userType) => {
       if (userType.toLowerCase() === "normal") {
-        return 0;
+        return userTypeDiscount.normal;
       } else if (userType.toLowerCase() === "bronze") {
-        return 5;
+        return userTypeDiscount.bronze;
       } else if (userType.toLowerCase() === "silver") {
-        return 10;
+        return userTypeDiscount.silver;
       } else if (userType.toLowerCase() === "gold") {
-        return 12;
+        return userTypeDiscount.gold;
       } else if (userType.toLowerCase() === "platinum") {
-        return 15;
+        return userTypeDiscount.platinum;
       }
     };
 
-    const bookDiscount = bookPrice * (userDiscount(userType) / 100);
+    const bookDiscount = bookPrice * userDiscount(userType);
 
     const discountPrice = bookPrice - bookDiscount;
 
     return `Livro ${bookTitle} vendido com sucesso por R$ ${discountPrice.toFixed(
       2
-    )} (${userDiscount(userType)}% de desconto).`;
+    )} (${userDiscount(userType) * 100}% de desconto).`;
   }
 };
 
